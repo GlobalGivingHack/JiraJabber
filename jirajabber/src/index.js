@@ -39,7 +39,7 @@ const handlers = {
 
   'UpdatePriority': function() {
     const slots = this.event.request.intent.slots;
-    const ticketId = "jj-" + slots.TicketId.value;
+    const ticketId = "JJ-" + slots.TicketId.value;
     const priority = slots.Priority.value;
 
     updatePriority(ticketId, priority, updatePriorityCallback.bind(this));
@@ -56,7 +56,7 @@ const handlers = {
 };
 
 function emitCallback(ticket) {
-  console.log("ticket: " + ticket);
+  console.log("ticket: " + JSON.stringify(ticket));
   this.emit(':tell', "I just created a new " + jiraType + " with id " + ticket.key);
 }
 
@@ -82,14 +82,14 @@ function updateStatus(ticketId, status, callback) {
   return callJiraLambda("status_change", story, callback);
 }
 
-function getTicketCallback(ticket) {
+function getTicketCallback(ticket, callback) {
   let getString = "Here are the details of " + ticket.type + " " + ticket.key +
     "The Summary is " + ticket.subject + ". " +
     "The Description is " + ticket.description + ".";
   this.emit(':tell', getString);
 }
 
-function getTicket(ticketId, status, callback) {
+function getTicket(ticketId, callback) {
   const story = {
     key: ticketId
   };
