@@ -1,0 +1,11 @@
+jira_url: https://jirajabber.atlassian.net
+jira_username: globalgivinghack2017+alexa
+jira_password: {{password}}
+jira_project: JJ
+issuetype: Bug
+
+# Add any custom fields below
+# If you have no custom_fields to add, do not edit below
+# an example custom field has been added to demonstrate its use
+custom_fields:
+ # customfield_10021: "As engineer:\n* Investigate the alert\n* Resolve the pager duty alert\n* Create future tickets as necessary"
