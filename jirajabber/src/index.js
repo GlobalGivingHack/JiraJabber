@@ -23,13 +23,18 @@ const handlers = {
     let handler = this;
     createStory(emitCallback.bind(this));
   },
-
   'UpdateStatus': function() {
     const slots = this.event.request.intent.slots;
-    const ticketId = slots.TicketId.value;
+    const ticketId = "JJ-" + slots.TicketId.value;
     const status = slots.Status.value;
 
     updateStatus(ticketId, status, updateStatusCallback.bind(this));
+  },
+  'GetTicket': function() {
+    const slots = this.event.request.intent.slots;
+    const ticketId = "JJ-" + slots.TicketId.value;
+
+    getTicket(ticketId, getTicketCallback.bind(this));
   },
 
   'AMAZON.CancelIntent': function () {
@@ -59,6 +64,7 @@ function createStory(callback) {
 function updateStatusCallback(ticket) {
   this.emit(':tell', "updated");
 }
+
 function updateStatus(ticketId, status, callback) {
   const story = {
     key: ticketId,
@@ -66,6 +72,21 @@ function updateStatus(ticketId, status, callback) {
   };
 
   return callJiraLambda("status_change", story, callback);
+}
+
+function getTicketCallback(ticket) {
+  let getString = "Here are the details of " + ticket.type + " " + ticket.key +
+    "The Summary is " + ticket.subject + ". " +
+    "The Description is " + ticket.description + ".";
+  this.emit(':tell', getString);
+}
+
+function getTicket(ticketId, status, callback) {
+  const story = {
+    key: ticketId
+  };
+
+  return callJiraLambda("read", story, callback);
 }
 
 function callJiraLambda(action, story, callback) {

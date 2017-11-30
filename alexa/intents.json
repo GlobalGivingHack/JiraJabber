@@ -14,7 +14,10 @@
       "intent": "CreateStory"
     },
     {
+<<<<<<< Updated upstream
       "intent": "UpdateStatus",
+=======
+>>>>>>> Stashed changes
       "slots": [
         {
           "name": "TicketId",
@@ -24,7 +27,21 @@
           "name": "Status",
           "type": "JIRA_STATUS"
         }
+<<<<<<< Updated upstream
       ]
+=======
+      ],
+      "intent": "UpdateStatus"
+    },
+    {
+      "slots": [
+        {
+          "name": "TicketId",
+          "type": "AMAZON.LITERAL"
+        }
+      ],
+      "intent": "GetTicket"
+>>>>>>> Stashed changes
     }
   ]
 }
