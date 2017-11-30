@@ -3,11 +3,28 @@
     {
       "slots": [
         {
-          "name": "StorySummary",
+          "name": "Summary",
           "type": "AMAZON.LITERAL"
+        },
+        {
+          "name": "JiraType",
+          "type": "JIRA_TYPES"
         }
       ],
       "intent": "CreateStory"
+    },
+    {
+      "intent": "UpdateStatus",
+      "slots": [
+        {
+          "name": "TicketId",
+          "type": "AMAZON.LITERAL"
+        },
+        {
+          "name": "Status",
+          "type": "JIRA_STATUS"
+        }
+      ]
     }
   ]
 }

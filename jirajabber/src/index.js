@@ -24,6 +24,14 @@ const handlers = {
     createStory(emitCallback.bind(this));
   },
 
+  'UpdateStatus': function() {
+    const slots = this.event.request.intent.slots;
+    const ticketId = slots.TicketId.value;
+    const status = slots.Status.value;
+
+    updateStatus(ticketId, status, updateStatusCallback.bind(this));
+  },
+
   'AMAZON.CancelIntent': function () {
     this.response.speak('Goodbye!');
     this.emit(':responseReady');
@@ -40,21 +48,39 @@ function emitCallback(ticket) {
 }
 
 function createStory(callback) {
+  const story = {
+    subject: summary,
+    issuetype: jiraType
+  };
+
+  return callJiraLambda("create", story, callback);
+}
+
+function updateStatusCallback(ticket) {
+  this.emit(':tell', "updated");
+}
+function updateStatus(ticketId, status, callback) {
+  const story = {
+    key: ticketId,
+    status: status
+  };
+
+  return callJiraLambda("status_change", story, callback);
+}
+
+function callJiraLambda(action, story, callback) {
   var lambda = new aws.Lambda({
     region: 'us-west-2' //change to your region
   });
 
-  let story = {
-    'action': 'create',
-    'data': {
-      "subject": summary,
-      "issuetype": jiraType
-    }
-  }
+  const payload = {
+    action: action,
+    data: story
+  };
 
   lambda.invoke({
     FunctionName: 'jiraIntegration',
-    Payload: JSON.stringify(story) // pass params
+    Payload: JSON.stringify(payload) // pass params
   }, function (error, data) {
     if (error) {
       console.log('error', error);
@@ -62,9 +88,6 @@ function createStory(callback) {
     if (data.Payload) {
       console.log(data.Payload);
       callback(JSON.parse(data.Payload));
-
     }
-  });
-
+  });  
 }
-

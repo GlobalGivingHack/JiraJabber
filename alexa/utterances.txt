@@ -1,5 +1,6 @@
-CreateStory create a new story called {name | StorySummary}
-CreateStory create a new story called {short summary | StorySummary}
-CreateStory create a new story called {a longer thing | StorySummary}
-CreateStory create a new story called {updating this cool thing | StorySummary}
-CreateStory create a new story called {create a new alexa skill | StorySummary}
+CreateStory create a new {JiraType} called {name | Summary}
+CreateStory create a new {JiraType} called {short summary | Summary}
+CreateStory create a new {JiraType} called {a longer thing | Summary}
+
+UpdateStatus update the status of {TicketId} to {Status}
+UpdateStatus change the status of {TicketId} to {Status}

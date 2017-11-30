@@ -9,8 +9,8 @@ const test = {
 beforeEach(function(done) {
   test.server = new bst.LambdaServer('../src/index.js', 10000, true);
   test.alexa = new bst.BSTAlexa('http://localhost:10000',
-                            '../alexa/intents.json',
-                            '../alexa/utterances.txt');
+                            '../../alexa/intents.json',
+                            '../../alexa/utterances.txt');
 
   test.server.start(function() {
     test.alexa.start(function(error) {
