@@ -16,7 +16,8 @@ class Ticket(BaseClass):
 
     def __init__(self, data, is_lambda):
         self.data = data
-        self.summary = self.get_summary(data)
+        if 'subject' in data:
+            self.summary = self.get_summary(data)
         self.ticket_data = {self.FIELDS_KEY: {}}
         self.jira_auth = self.get_jira_auth()
         self.ticket_url = None
