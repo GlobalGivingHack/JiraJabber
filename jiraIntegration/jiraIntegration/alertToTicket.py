@@ -23,7 +23,7 @@ def read(event, is_lambda):
 
 def status_change(event, is_lambda):
     ticket = Ticket(event, is_lambda)
-    ticket.change_status("status")
+    ticket.change_status(event["status"])
     return ticket.to_hash()
 
 def create(event, is_lambda):
