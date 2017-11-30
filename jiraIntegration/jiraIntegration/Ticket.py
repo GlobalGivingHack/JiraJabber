@@ -95,7 +95,7 @@ class Ticket(BaseClass):
             headers = {'Content-Type': 'application/json'}
 
             status_change_ticket_url = '{0}/rest/api/2/issue/{1}/transitions'.format(self.CONFIGS['jira_url'], self.key)
-
+            status = status.lower()
             status_hash = {
                 "todo": "11",
                 "in_progress": "21",
