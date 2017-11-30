@@ -1,7 +1,13 @@
 {
   "intents": [
     {
-      "intent": "Start"
+      "slots": [
+        {
+          "name": "StorySummary",
+          "type": "AMAZON.LITERAL"
+        }
+      ],
+      "intent": "CreateStory"
     }
   ]
 }

@@ -1,1 +1,5 @@
-Start start
+CreateStory create a new story called {name | StorySummary}
+CreateStory create a new story called {short summary | StorySummary}
+CreateStory create a new story called {a longer thing | StorySummary}
+CreateStory create a new story called {updating this cool thing | StorySummary}
+CreateStory create a new story called {create a new alexa skill | StorySummary}
