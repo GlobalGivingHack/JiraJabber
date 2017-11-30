@@ -4,6 +4,9 @@ const Alexa = require('alexa-sdk');
 const Speech = require('ssml-builder');
 const aws = require('aws-sdk');
 
+var summary;
+var jiraType;
+
 exports.handler = function (event, context, callback) {
   const alexa = Alexa.handler(event, context);
   alexa.registerHandlers(handlers);
@@ -15,9 +18,10 @@ const handlers = {
     this.emit(':tell', 'Welcome to Jira Jabber');
   },
   'CreateStory': function () {
-    const storySummary = this.event.request.intent.slots.StorySummary.value;
+    summary = this.event.request.intent.slots.Summary.value;
+    jiraType = this.event.request.intent.slots.JiraType.value;
     let handler = this;
-    createStory(storySummary, emitCallback.bind(this));
+    createStory(emitCallback.bind(this));
   },
 
   'AMAZON.CancelIntent': function () {
@@ -30,17 +34,21 @@ const handlers = {
   }
 };
 
-function emitCallback() {
-  this.emit(':tell', "I just created a new story with ticket number 123");
+function emitCallback(ticket) {
+  console.log("ticket: " + ticket);
+  this.emit(':tell', "I just created a new " + jiraType + " with id " + ticket.key);
 }
 
-function createStory(storySummary, callback) {
+function createStory(callback) {
   var lambda = new aws.Lambda({
     region: 'us-west-2' //change to your region
   });
 
   let story = {
-    "subject": storySummary
+    'action': 'create',
+    'data': {
+      "subject": summary
+    }
   }
 
   lambda.invoke({
@@ -52,7 +60,7 @@ function createStory(storySummary, callback) {
     }
     if (data.Payload) {
       console.log(data.Payload);
-      callback(data.Payload);
+      callback(JSON.parse(data.Payload));
 
     }
   });
