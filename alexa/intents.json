@@ -14,22 +14,15 @@
       "intent": "CreateStory"
     },
     {
-<<<<<<< Updated upstream
-      "intent": "UpdateStatus",
-=======
->>>>>>> Stashed changes
       "slots": [
         {
           "name": "TicketId",
-          "type": "AMAZON.LITERAL"
+          "type": "AMAZON.NUMBER"
         },
         {
           "name": "Status",
           "type": "JIRA_STATUS"
         }
-<<<<<<< Updated upstream
-      ]
-=======
       ],
       "intent": "UpdateStatus"
     },
@@ -37,11 +30,23 @@
       "slots": [
         {
           "name": "TicketId",
-          "type": "AMAZON.LITERAL"
+          "type": "AMAZON.NUMBER"
         }
       ],
       "intent": "GetTicket"
->>>>>>> Stashed changes
+    },
+    {
+      "intent": "UpdatePriority",
+      "slots": [
+        {
+          "name": "TicketId",
+          "type": "AMAZON.NUMBER"
+        },
+        {
+          "name": "Priority",
+          "type": "JIRA_PRIORITY"
+        }
+      ]
     }
   ]
 }

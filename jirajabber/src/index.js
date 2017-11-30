@@ -37,6 +37,14 @@ const handlers = {
     getTicket(ticketId, getTicketCallback.bind(this));
   },
 
+  'UpdatePriority': function() {
+    const slots = this.event.request.intent.slots;
+    const ticketId = "jj-" + slots.TicketId.value;
+    const priority = slots.Priority.value;
+
+    updatePriority(ticketId, priority, updatePriorityCallback.bind(this));
+  },
+
   'AMAZON.CancelIntent': function () {
     this.response.speak('Goodbye!');
     this.emit(':responseReady');
@@ -62,7 +70,7 @@ function createStory(callback) {
 }
 
 function updateStatusCallback(ticket) {
-  this.emit(':tell', "updated");
+  this.emit(':tell', "Ticket " + ticket.key + " status updated");
 }
 
 function updateStatus(ticketId, status, callback) {
@@ -87,6 +95,18 @@ function getTicket(ticketId, status, callback) {
   };
 
   return callJiraLambda("read", story, callback);
+}
+
+function updatePriorityCallback(ticket) {
+  this.emit(':tell', "Ticket " + ticket.key + " priority updated");
+}
+function updatePriority(ticketId, priority, callback) {
+  const story = {
+    key: ticketId,
+    priority: priority
+  };
+
+  return callJiraLambda("priority_change", story, callback);
 }
 
 function callJiraLambda(action, story, callback) {

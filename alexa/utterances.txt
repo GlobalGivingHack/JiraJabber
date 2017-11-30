@@ -2,5 +2,8 @@ CreateStory create a new {JiraType} called {name | Summary}
 CreateStory create a new {JiraType} called {short summary | Summary}
 CreateStory create a new {JiraType} called {a longer thing | Summary}
 
-UpdateStatus update the status of {TicketId} to {Status}
-UpdateStatus change the status of {TicketId} to {Status}
+UpdateStatus update the status of jj {TicketId} to {Status}
+UpdateStatus change the status of jj {TicketId} to {Status}
+
+UpdatePriority update the priority of jj {TicketId} to {Priority}
+UpdatePriority change the priority of jj {TicketId} to {Priority}
