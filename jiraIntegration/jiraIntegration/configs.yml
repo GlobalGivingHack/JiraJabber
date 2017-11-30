@@ -1,8 +1,8 @@
 jira_url: https://jirajabber.atlassian.net
 jira_username: globalgivinghack2017+alexa
-jira_password: {{password}}
+jira_password: AlexaPassword
 jira_project: JJ
-issuetype: Bug
+issuetype: Story
 
 # Add any custom fields below
 # If you have no custom_fields to add, do not edit below
