@@ -47,7 +47,8 @@ function createStory(callback) {
   let story = {
     'action': 'create',
     'data': {
-      "subject": summary
+      "subject": summary,
+      "issuetype": jiraType
     }
   }
 
