@@ -96,7 +96,14 @@ class Ticket(BaseClass):
 
             status_change_ticket_url = '{0}/rest/api/2/issue/{1}/transitions'.format(self.CONFIGS['jira_url'], self.key)
 
-            body = {"transition": {"id": "21"}}
+            status_hash = {
+                "todo": "11",
+                "in_progress": "21",
+                "done": "31"
+            }
+            if status not in status_hash:
+                return False
+            body = {"transition": {"id": status_hash[status]}}
             request = requests.post(status_change_ticket_url, headers=headers, auth=self.jira_auth,
                                    data=json.dumps(body))
             print request
