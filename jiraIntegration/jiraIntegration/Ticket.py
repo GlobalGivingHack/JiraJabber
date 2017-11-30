@@ -24,7 +24,8 @@ class Ticket(BaseClass):
         super(Ticket, self).__init__(is_lambda)
         if 'key' in data:
             self._load_ticket_from_key(data['key'])
-        self.set_ticket_data()
+        else:
+            self.set_ticket_data()
     
     def _load_ticket_from_key(self, key):
         try:
