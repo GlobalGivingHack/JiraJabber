@@ -1,0 +1,13 @@
+{
+  "name": "jira-jabber",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "alexa-sdk": "^1.0.8",
+    "ssml-builder": "^0.1.0"
+  },
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
+}
